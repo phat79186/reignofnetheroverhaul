@@ -5,7 +5,7 @@ issueTrackerURL=""
 
 [[mods]]
 modId="ron_golem_healer_integration"
-version="1.0.0"
+version="26.1"
 displayName="RoN Golem Healer Integration"
 authors="Codex"
 description='''Integrates the original Villager Golem Healer entity as a Reign of Nether unit.'''
