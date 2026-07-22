@@ -1,31 +1,31 @@
 import zipfile, os, shutil
 
 combined_mods_toml = """modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="[26.1,)"
 license="GNU GPLv3"
 
 [[mods]]
 modId="reignofnether"
 version="26.1"
-displayName="Reign of Nether"
+displayName="Reign of Nether Overhaul"
 logoFile="examplemod.png"
 credits="Thanks to Technovision for his YouTube guides"
-authors="SoLegendary, Goodbird (ported to 1.20.1)"
+authors="SoLegendary, Goodbird, Codex"
 description='''
-Minecraft, except it's an RTS
+Minecraft, except it's an RTS (Overhaul Version 26.1)
 '''
 
 [[dependencies.reignofnether]]
     modId="forge"
     mandatory=true
-    versionRange="[47,)"
+    versionRange="[26.1,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.reignofnether]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1,1.21)"
+    versionRange="[1.20.1,1.26.1)"
     ordering="NONE"
     side="BOTH"
 
@@ -39,15 +39,43 @@ description='''Integrates the original Villager Golem Healer entity as a Reign o
 [[dependencies.ron_golem_healer_integration]]
 modId="forge"
 mandatory=true
-versionRange="[47.4.0,)"
+versionRange="[26.1,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.ron_golem_healer_integration]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.20.1,1.21)"
+versionRange="[1.20.1,1.26.1)"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.ron_golem_healer_integration]]
+modId="reignofnether"
+mandatory=true
+versionRange="[26.1,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.ron_golem_healer_integration]]
+modId="villagergolemhealer"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.ron_golem_healer_integration]]
+modId="guardillagers"
+mandatory=true
+versionRange="[1.0.1,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.ron_golem_healer_integration]]
+modId="slash_illager"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="AFTER"
 side="BOTH"
 """
 
@@ -102,7 +130,6 @@ def update_jar(jar_path):
         if os.path.exists(temp_path):
             os.remove(temp_path)
 
-# Prepare 26.1 jar based on base jar or existing jar
 base_jar = os.path.join(base_dir, 'reignofnether_base.jar')
 target_261_jar = os.path.join(base_dir, 'reignofnether-overhaul-26.1.jar')
 target_101_jar = os.path.join(base_dir, 'reignofnether-overhaul-1.0.1.jar')
