@@ -1,58 +1,58 @@
 modLoader="javafml"
-loaderVersion="[26.1,)"
+loaderVersion="[47,)"
 license="All Rights Reserved"
 issueTrackerURL=""
 
 [[mods]]
 modId="reignofnether"
-version="26.1"
-displayName="Reign of Nether Overhaul 26.1"
+version="1.0.2"
+displayName="Reign of Nether Overhaul"
 logoFile="examplemod.png"
 credits="Thanks to Technovision for his YouTube guides"
 authors="SoLegendary, Goodbird, Codex"
 description='''
-Reign of Nether Overhaul 26.1
+Minecraft, except it's an RTS (Overhaul Version 1.0.2)
 '''
 
 [[dependencies.reignofnether]]
     modId="forge"
     mandatory=true
-    versionRange="[26.1,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.reignofnether]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.26.1,)"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
 
 [[mods]]
 modId="ron_golem_healer_integration"
-version="26.1"
-displayName="Reign of Nether Overhaul 26.1"
+version="1.0.2"
+displayName="RoN Golem Healer Integration"
 authors="Codex"
-description='''Reign of Nether Overhaul 26.1'''
+description='''Integrates the original Villager Golem Healer entity as a Reign of Nether unit.'''
 
 [[dependencies.ron_golem_healer_integration]]
 modId="forge"
 mandatory=true
-versionRange="[26.1,)"
+versionRange="[47.4.0,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.ron_golem_healer_integration]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.26.1,)"
+versionRange="[1.20.1,1.21)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.ron_golem_healer_integration]]
 modId="reignofnether"
 mandatory=true
-versionRange="[26.1,)"
+versionRange="[1.0.2,)"
 ordering="AFTER"
 side="BOTH"
 

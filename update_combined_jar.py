@@ -1,59 +1,59 @@
 import zipfile, os, shutil
 
 combined_mods_toml = """modLoader="javafml"
-loaderVersion="[26.1,)"
+loaderVersion="[47,)"
 license="GNU GPLv3"
 
 [[mods]]
 modId="reignofnether"
-version="26.1"
-displayName="Reign of Nether Overhaul 26.1"
+version="1.0.2"
+displayName="Reign of Nether Overhaul"
 logoFile="examplemod.png"
 credits="Thanks to Technovision for his YouTube guides"
 authors="SoLegendary, Goodbird, Codex"
 description='''
-Reign of Nether Overhaul 26.1
+Minecraft, except it's an RTS (Overhaul Version 1.0.2)
 '''
 
 [[dependencies.reignofnether]]
     modId="forge"
     mandatory=true
-    versionRange="[26.1,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.reignofnether]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.26.1,)"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
 
 [[mods]]
 modId="ron_golem_healer_integration"
-version="26.1"
-displayName="Reign of Nether Overhaul 26.1"
+version="1.0.2"
+displayName="RoN Golem Healer Integration"
 authors="Codex"
-description='''Reign of Nether Overhaul 26.1'''
+description='''Integrates the original Villager Golem Healer entity as a Reign of Nether unit.'''
 
 [[dependencies.ron_golem_healer_integration]]
 modId="forge"
 mandatory=true
-versionRange="[26.1,)"
+versionRange="[47.4.0,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.ron_golem_healer_integration]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.26.1,)"
+versionRange="[1.20.1,1.21)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.ron_golem_healer_integration]]
 modId="reignofnether"
 mandatory=true
-versionRange="[26.1,)"
+versionRange="[1.0.2,)"
 ordering="AFTER"
 side="BOTH"
 
@@ -131,31 +131,32 @@ def update_jar(jar_path):
             os.remove(temp_path)
 
 base_jar = os.path.join(base_dir, 'reignofnether_base.jar')
-target_261_jar = os.path.join(base_dir, 'reignofnether-overhaul-26.1.jar')
+target_102_jar = os.path.join(base_dir, 'reignofnether-overhaul-1.0.2.jar')
 target_101_jar = os.path.join(base_dir, 'reignofnether-overhaul-1.0.1.jar')
 
 if os.path.exists(base_jar):
-    shutil.copy(base_jar, target_261_jar)
-    shutil.copy(base_jar, target_101_jar)
+    shutil.copy(base_jar, target_102_jar)
 
-update_jar(target_261_jar)
+update_jar(target_102_jar)
 update_jar(target_101_jar)
 update_jar(base_jar)
 
 mc_mods_dir = 'C:/Users/User/AppData/Roaming/.minecraft/mods'
-mc_261 = os.path.join(mc_mods_dir, 'reignofnether-overhaul-26.1.jar')
-mc_101 = os.path.join(mc_mods_dir, 'reignofnether-overhaul-1.0.1.jar')
+mc_102 = os.path.join(mc_mods_dir, 'reignofnether-overhaul-1.0.2.jar')
 
 if os.path.exists(mc_mods_dir):
-    try:
-        shutil.copy(target_261_jar, mc_261)
-        print(f'Copied reignofnether-overhaul-26.1.jar to {mc_mods_dir}')
-    except Exception as e:
-        print(f'Note: Could not copy 26.1 jar: {e}')
+    # Remove old version jars (26.1, 1.0.1)
+    for old_jar_name in ['reignofnether-overhaul-26.1.jar', 'reignofnether-overhaul-1.0.1.jar']:
+        old_path = os.path.join(mc_mods_dir, old_jar_name)
+        if os.path.exists(old_path):
+            try:
+                os.remove(old_path)
+                print(f'Removed old {old_jar_name} from {mc_mods_dir}')
+            except Exception as e:
+                print(f'Note: Could not remove {old_jar_name}: {e}')
 
     try:
-        if os.path.exists(mc_101):
-            os.remove(mc_101)
-            print(f'Removed old reignofnether-overhaul-1.0.1.jar from {mc_mods_dir}')
+        shutil.copy(target_102_jar, mc_102)
+        print(f'Copied reignofnether-overhaul-1.0.2.jar to {mc_mods_dir}')
     except Exception as e:
-        print(f'Note: Could not remove old 1.0.1 jar: {e}')
+        print(f'Note: Could not copy 1.0.2 jar: {e}')
