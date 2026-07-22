@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: ron_golem_healer_integration
+Specification-Vendor: Codex
+Specification-Version: 1
+Implementation-Title: ron-golem-healer-integration
+Implementation-Version: 1.0.0
+Implementation-Vendor: Codex
+MixinConfigs: ron_golem_healer_integration.mixins.json
+

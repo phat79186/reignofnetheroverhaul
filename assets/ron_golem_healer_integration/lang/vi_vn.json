@@ -1,0 +1,14 @@
+{
+  "ability.reignofnether.enchant.multishot": "Phù phép: Băng Đạn Gây Nổ",
+  "ability.reignofnether.enchant.multishot.tooltip1": "Phù phép súng Springfield 1873 của Kẻ Cướp với Mưa Tên,",
+  "ability.reignofnether.enchant.multishot.tooltip2": "thay thế băng đạn thường bằng băng đạn gây nổ HE.",
+  "ability.reignofnether.enchant.multishot.tooltip3": "Xóa tất cả các phù phép khác.",
+  "ability.reignofnether.enchant.quickshot": "Phù phép: Băng Đạn Gây Cháy",
+  "ability.reignofnether.enchant.quickshot.tooltip1": "Phù phép súng Springfield 1873 của Kẻ Cướp với Nạp Nhanh,",
+  "ability.reignofnether.enchant.quickshot.tooltip2": "thay thế băng đạn thường bằng băng đạn gây cháy.",
+  "ability.reignofnether.enchant.quickshot.tooltip3": "Xóa tất cả các phù phép khác.",
+  "hud.enchant.reignofnether.multishot": "Băng Đạn Gây Nổ",
+  "hud.enchant.reignofnether.multishot.tooltip": "Bắn ra đạn nổ",
+  "hud.enchant.reignofnether.quickshot": "Băng Đạn Gây Cháy",
+  "hud.enchant.reignofnether.quickshot.tooltip": "Bắn ra đạn cháy"
+}

@@ -1,0 +1,14 @@
+{
+  "ability.reignofnether.enchant.multishot": "Enchant: Explosive Magazine",
+  "ability.reignofnether.enchant.multishot.tooltip1": "Enchants a Pillager's Springfield 1873 with Multishot,",
+  "ability.reignofnether.enchant.multishot.tooltip2": "replacing its ammunition with explosive HE rounds.",
+  "ability.reignofnether.enchant.multishot.tooltip3": "Removes other library enchantments.",
+  "ability.reignofnether.enchant.quickshot": "Enchant: Incendiary Magazine",
+  "ability.reignofnether.enchant.quickshot.tooltip1": "Enchants a Pillager's Springfield 1873 with Quick Charge,",
+  "ability.reignofnether.enchant.quickshot.tooltip2": "replacing its ammunition with incendiary fire rounds.",
+  "ability.reignofnether.enchant.quickshot.tooltip3": "Removes other library enchantments.",
+  "hud.enchant.reignofnether.multishot": "Explosive Magazine",
+  "hud.enchant.reignofnether.multishot.tooltip": "Fires explosive rounds",
+  "hud.enchant.reignofnether.quickshot": "Incendiary Magazine",
+  "hud.enchant.reignofnether.quickshot.tooltip": "Fires incendiary rounds"
+}

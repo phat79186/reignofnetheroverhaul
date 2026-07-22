@@ -1,0 +1,30 @@
+# Java compiled files
+*.class
+
+# Jar archives
+*.jar
+
+# Decompiled & temporary files
+decompiled_*
+temp_*
+scratch/
+Reign of nether ovaehaul/
+yesman/
+net/
+
+# Logs and system files
+.idea/
+.vscode/
+*.swp
+*.tmp
+*.log
+*.txt
+*.args
+
+# Keep root source files
+!.gitignore
+!LogInjector.java
+!MixinGenerator.java
+!update_combined_jar.py
+!full_merge.py
+!search_log.py
