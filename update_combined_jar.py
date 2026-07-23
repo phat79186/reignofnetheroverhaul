@@ -81,15 +81,24 @@ ordering="AFTER"
 side="BOTH"
 """
 
-codex_files = {}
-com_codex_dir = os.path.join(base_dir, 'com', 'codex')
+custom_files = {}
 
+# 1. Collect com/codex
+com_codex_dir = os.path.join(base_dir, 'com', 'codex')
 for root, dirs, files in os.walk(com_codex_dir):
     for f in files:
         full = os.path.join(root, f)
-        rel = os.path.relpath(full, base_dir)
-        rel_zip = rel.replace('\\', '/')
-        codex_files[rel_zip] = open(full, 'rb').read()
+        rel = os.path.relpath(full, base_dir).replace('\\', '/')
+        custom_files[rel] = open(full, 'rb').read()
+
+# 2. Collect assets
+assets_dir = os.path.join(base_dir, 'assets')
+if os.path.exists(assets_dir):
+    for root, dirs, files in os.walk(assets_dir):
+        for f in files:
+            full = os.path.join(root, f)
+            rel = os.path.relpath(full, base_dir).replace('\\', '/')
+            custom_files[rel] = open(full, 'rb').read()
 
 mixin_json_path = os.path.join(base_dir, 'ron_golem_healer_integration.mixins.json')
 mixin_json_data = open(mixin_json_path, 'rb').read()
@@ -113,6 +122,9 @@ def update_jar(jar_path):
             for item in zin.infolist():
                 if item.filename.startswith('com/codex/') or item.filename == 'ron_golem_healer_integration.mixins.json':
                     continue
+                # If overwriting custom assets, skip original item
+                if item.filename in custom_files:
+                    continue
                 if item.filename == 'META-INF/mods.toml':
                     zout.writestr(item, combined_mods_toml.encode('utf-8'))
                 elif item.filename == 'META-INF/MANIFEST.MF':
@@ -120,13 +132,13 @@ def update_jar(jar_path):
                 else:
                     zout.writestr(item, zin.read(item.filename))
             
-            for path, data in codex_files.items():
+            for path, data in custom_files.items():
                 zout.writestr(path, data)
             zout.writestr('ron_golem_healer_integration.mixins.json', mixin_json_data)
 
     try:
         os.replace(temp_path, jar_path)
-        print(f'Successfully updated combined jar: {jar_path}')
+        print(f'Successfully updated combined jar with classes and assets: {jar_path}')
     except PermissionError:
         print(f'Warning: Could not overwrite {jar_path} because it is currently in use.')
         if os.path.exists(temp_path):
