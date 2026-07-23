@@ -1,5 +1,7 @@
 import zipfile, os, shutil
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
 combined_mods_toml = """modLoader="javafml"
 loaderVersion="[47,)"
 license="GNU GPLv3"
@@ -80,7 +82,6 @@ side="BOTH"
 """
 
 codex_files = {}
-base_dir = os.path.dirname(os.path.abspath(__file__))
 com_codex_dir = os.path.join(base_dir, 'com', 'codex')
 
 for root, dirs, files in os.walk(com_codex_dir):
@@ -92,6 +93,16 @@ for root, dirs, files in os.walk(com_codex_dir):
 
 mixin_json_path = os.path.join(base_dir, 'ron_golem_healer_integration.mixins.json')
 mixin_json_data = open(mixin_json_path, 'rb').read()
+
+manifest_content = """Manifest-Version: 1.0
+Specification-Title: reignofnether
+Specification-Vendor: examplemodsareus
+Specification-Version: 1
+Implementation-Title: reignofnether
+Implementation-Vendor: examplemodsareus
+Implementation-Version: 1.0.2
+MixinConfigs: reignofnether.mixins.json,com/solegendary/reignofnether/essentialpartnermod/mixins.json,ron_golem_healer_integration.mixins.json
+"""
 
 def update_jar(jar_path):
     if not os.path.exists(jar_path):
@@ -105,16 +116,7 @@ def update_jar(jar_path):
                 if item.filename == 'META-INF/mods.toml':
                     zout.writestr(item, combined_mods_toml.encode('utf-8'))
                 elif item.filename == 'META-INF/MANIFEST.MF':
-                    manifest_str = zin.read(item.filename).decode('utf-8')
-                    if 'ron_golem_healer_integration.mixins.json' not in manifest_str:
-                        lines = manifest_str.splitlines()
-                        new_lines = []
-                        for line in lines:
-                            if line.startswith('MixinConfigs:'):
-                                line = line + ',ron_golem_healer_integration.mixins.json'
-                            new_lines.append(line)
-                        manifest_str = '\n'.join(new_lines) + '\n'
-                    zout.writestr(item, manifest_str.encode('utf-8'))
+                    zout.writestr(item, manifest_content.encode('utf-8'))
                 else:
                     zout.writestr(item, zin.read(item.filename))
             
@@ -145,16 +147,6 @@ mc_mods_dir = 'C:/Users/User/AppData/Roaming/.minecraft/mods'
 mc_102 = os.path.join(mc_mods_dir, 'reignofnether-overhaul-1.0.2.jar')
 
 if os.path.exists(mc_mods_dir):
-    # Remove old version jars (26.1, 1.0.1)
-    for old_jar_name in ['reignofnether-overhaul-26.1.jar', 'reignofnether-overhaul-1.0.1.jar']:
-        old_path = os.path.join(mc_mods_dir, old_jar_name)
-        if os.path.exists(old_path):
-            try:
-                os.remove(old_path)
-                print(f'Removed old {old_jar_name} from {mc_mods_dir}')
-            except Exception as e:
-                print(f'Note: Could not remove {old_jar_name}: {e}')
-
     try:
         shutil.copy(target_102_jar, mc_102)
         print(f'Copied reignofnether-overhaul-1.0.2.jar to {mc_mods_dir}')
