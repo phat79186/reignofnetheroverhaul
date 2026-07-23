@@ -97,7 +97,7 @@ public interface UnitMixin {
     }
 
     @Inject(method = "tick", at = @At("HEAD"), remap = false)
-    private static void onTick(Unit unit, CallbackInfo ci) {
+    public static void onTick(Unit unit, CallbackInfo ci) {
         if (unit instanceof Mob unitMob && EnchantmentRegistrar.FORTYIFYING != null && EnchantmentRegistrar.FORTYIFYING.isPresent()) {
             if (unitMob.f_19797_ % 80 == 0) {
                 Enchantment fortifying = (Enchantment) EnchantmentRegistrar.FORTYIFYING.get();

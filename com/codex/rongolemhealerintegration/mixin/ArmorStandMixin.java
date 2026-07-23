@@ -1,6 +1,5 @@
 package com.codex.rongolemhealerintegration.mixin;
 
-import com.camdenscottc.colonialcannons.projectile.CannonballEntity;
 import com.solegendary.reignofnether.building.BuildingPlacement;
 import com.solegendary.reignofnether.building.BuildingUtils;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,8 +27,12 @@ public abstract class ArmorStandMixin {
         if (!self.m_9236_().m_5776_()) { // server side
             BuildingPlacement bp = BuildingUtils.findBuilding(false, self.m_20183_());
             if (bp != null) {
-                boolean isCannonDamage = (source.m_7639_() instanceof CannonballEntity) 
-                                      || (source.m_7640_() instanceof CannonballEntity);
+                boolean isCannonDamage = false;
+                if (source.m_7639_() != null && source.m_7639_().getClass().getName().contains("CannonballEntity")) {
+                    isCannonDamage = true;
+                } else if (source.m_7640_() != null && source.m_7640_().getClass().getName().contains("CannonballEntity")) {
+                    isCannonDamage = true;
+                }
                 if (isCannonDamage) {
                     // Deal corresponding damage to the building
                     double blocksToDestroy = (double) (amount / 2.0f);
